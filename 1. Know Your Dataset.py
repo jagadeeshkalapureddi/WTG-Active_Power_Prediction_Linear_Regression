@@ -1,0 +1,202 @@
+#!/usr/bin/env python
+# coding: utf-8
+
+# # `KNOW YOUR DATASET`
+
+# In[9]:
+
+
+#!pip install pillow
+from PIL import Image
+#!pip install requests
+import requests
+from io import BytesIO
+
+response = requests.get('https://www.renewableenergyhub.co.uk/images/design/pages/wind-turbine-diagram.png')
+Image.open(BytesIO(response.content))
+
+
+# ## **`WIND TURBINE GENERATOR`**
+
+# #### ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+# ***WTG PRINCIPLE***
+# 
+#        Wind turbines work on a simple principle: instead of using electricity to make wind—like a fan—wind turbines use wind to make electricity. Wind turns the propeller-like blades of a turbine around a rotor, which spins a generator, which generates electricity
+# #### --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+# ### `KNOW ABOUT WIND TURBINE PARTS`
+
+# #### ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+# ***NACELLE***
+# 
+#        Sits atop the tower and contains the gear box, low- and high-speed shafts, generator, controller, and brake. Some nacelles are large enough for a helicopter to land on.
+# 
+# ***BLADES***
+# 
+#        Lifts and rotates when wind is blown over them, causing the rotor to spin. Most turbines have either two or three blades.
+# 
+# ***ROTOR***
+#        
+#        Blades and hub together form the rotor. Used to pass the Rotating energy from blades to Gearbox Low Speed Shaft.
+# 
+# ***LOW-SPEED SHAFT***
+# 
+#        It is connected rotor and used to Turns the low-speed shaft at about 30-60 rpm depends on Gearbox.
+#        
+# ***GEAR BOX***
+# 
+#        Connects the low-speed shaft to the high-speed shaft and increases the rotational speeds from about 30-60 rotations per minute (rpm), to about 1,000-1,800 rpm; this is the rotational speed required by most generators to produce electricity. The gear box is a costly (and heavy) part of the wind turbine.
+#       
+# ***HIGH-SPEED SHAFT***
+# 
+#        It is connected between Gearbox and Generator to Drive the generator at High speed to generate the electricity.
+#        
+# ***GENERATOR***
+# 
+#        Produces 50-cycle AC electricity; it is usually an Distributed Frequency induction generator (DFIG).
+# 
+# ***ANEMOMETER***
+# 
+#        Measures the wind speed and transmits wind speed data to the controller.
+#        
+# ***PITCH SYSTEM***
+# 
+#        Turns (or pitches) blades out of the wind to control the rotor speed, and to keep the rotor from turning in winds that are too high or too low to produce electricity.
+#        
+# ***WIND VANE***
+# 
+#        Measures wind direction and communicates with the yaw drive to orient the turbine properly with respect to the wind.
+#        
+# ***YAW DRIVE***
+# 
+#        Orients upwind turbines to keep them facing the wind when the direction changes. Downwind turbines don't require a yaw drive because the wind manually blows the rotor away from it.
+#        
+# ***TRANSFORMER***
+# 
+#        Transformer are used to transform the electrical voltage from one level to another level.
+# #### --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+# ### `DATA DESCRIPTION`
+
+# #### ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+#         The dataset show the information of a single turbine generator in 10 minutual slots from last few years as shown below. The data says that the Turbine Generators Parameters like Power, Temperatures, Speeds and Position during Operation.
+#          
+#         From this i am going to "Predict the Wind Speed trend" for next time slot and Checking the "relationship between the Average Active Power and Other Parameters for applying Linear Regression".
+# #### --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+# <table>
+# <tbody>
+# <tr><th><b>Variable</b></th><th><bb>Definition</bb></th><th><bb>Data Type</bb></th></tr>
+# <tr>
+# <td>Date</td>
+# <td>Date of a Observation Created</td>
+# <td>Format (DD-MM-YYYY)</td>
+# </tr>
+# <tr>
+# <td>Time</td>
+# <td>10 Minutes Time Slot of a Observation Created</td>
+# <td>Format (HH:MM:SS)</td>
+# </tr>
+# <tr>
+# <td>Avg_Active_Power</td>
+# <td>Average Power Generated by a turbine in a 10 Minute time slot</td>
+# <td>Integer</td>
+# </tr>
+# <tr>
+# <td>Avg_Ambient_Temp</td>
+# <td>Average Ambient Temperature Measured by a turbine during a 10 Minute time slot</td>
+# <td>Integer</td>
+# </tr>
+# <tr>
+# <td>Avg_Generator_Speed</td>
+# <td>Average Generator Speed Measured by a turbine during a 10 Minute time slot</td>
+# <td>Integer</td>
+# </tr>
+# <tr>
+# <td>Avg_Nacelle_Pos</td>
+# <td>Average Nacelle Position of a turbine as per wind direction during a 10 Minute time slot</td>
+# <td>Integer</td>
+# </tr>
+# <tr>
+# <td>Avg_Pitch_Angle</td>
+# <td>Average Pitch Angle of a turbine as per wind Speed during a 10 Minute time slot</td>
+# <td>Integer</td>
+# </tr>
+# <tr>
+# <td>Avg_Rotor_Speed</td>
+# <td>Average Rotor Speed of a turbine as per wind Speed during a 10 Minute time slot</td>
+# <td>Integer</td>
+# </tr>
+# <tr>
+# <td>Avg_Wind_Speed</td>
+# <td>Average Wind Speed of a turbine during a 10 Minute time slot</td>
+# <td>Integer</td>
+# </tr>
+# <tr>
+# <td>Bearing_DE_Temp</td>
+# <td>Average Bearing Drive End Temperature of a turbine during a 10 Minute time slot</td>
+# <td>Integer</td>
+# </tr>
+# <tr>
+# <td>Bearing_NDE_Temp</td>
+# <td>Average Non Bearing Drive End Temperature of a turbine during a 10 Minute time slot</td>
+# <td>Integer</td>
+# </tr>
+# <tr>
+# <td>Gearbox_bearing_Temp</td>
+# <td>Average Gearbox Bearing Temperature of a turbine during a 10 Minute time slot</td>
+# <td>Integer</td>
+# </tr>
+# <tr>
+# <td>Gearbox_oil_Temp</td>
+# <td>Average Gearbox Oil Temperature of a turbine during a 10 Minute time slot</td>
+# <td>Integer</td>
+# </tr>
+# <tr>
+# <td>Generator_winds_Temp_1</td>
+# <td>Average Generator winding R Phase Temperature of a turbine during a 10 Minute time slot</td>
+# <td>Integer</td>
+# </tr>
+# <tr>
+# <td>Generator_winds_Temp_2</td>
+# <td>Average Generator winding Y Phase Temperature of a turbine during a 10 Minute time slot</td>
+# <td>Integer</td>
+# </tr>
+# <tr>
+# <td>Generator_winds_Temp_3</td>
+# <td>Average Generator winding B Phase Temperature of a turbine during a 10 Minute time slot</td>
+# <td>Integer</td>
+# </tr>
+# <tr>
+# <td>Generator�s_sliprings_Temp</td>
+# <td>Average Generator's sliprings Temperature of a turbine during a 10 Minute time slot</td>
+# <td>Integer</td>
+# </tr>
+# <tr>
+# <td>Hydraulic_group_pressure</td>
+# <td>Average Hydraulic Group Pressure of a turbine during a 10 Minute time slot</td>
+# <td>Integer</td>
+# </tr>
+# <tr>
+# <td>Nacelle_Misalignment_Avg_Wind_Dir</td>
+# <td>Average Nacelle Misalignment & Wind Direction of a turbine during a 10 Minute time slot</td>
+# <td>Integer</td>
+# </tr>
+# <tr>
+# <td>Trafo_1_wind_Temp</td>
+# <td>Average Transformer winding R Phase Temperature of a turbine during a 10 Minute time slot</td>
+# <td>Integer</td>
+# </tr>
+# <tr>
+# <td>Trafo_2_wind_Temp</td>
+# <td>Average Transformer winding Y Phase Temperature of a turbine during a 10 Minute time slot</td>
+# <td>Integer</td>
+# </tr>
+# <tr>
+# <td>Trafo_3_wind_Temp</td>
+# <td>Average Transformer winding B Phase Temperature of a turbine during a 10 Minute time slot</td>
+# <td>Integer</td>
+# </tr>
+# 
+# </tbody>
+# </table>
